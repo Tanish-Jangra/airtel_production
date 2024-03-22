@@ -8,7 +8,7 @@ const Navbar = ({isAdmin, isAuthenticated}) => {
     localStorage.clear();
     isAdmin=false;
     isAuthenticated=false;
-    navigate("/login");
+    navigate("/");
   }
   return (
     <div className='NavbarContainer'>

@@ -4,13 +4,13 @@ import axios from 'axios';
 import SIMsDisplay from './SimsDisplay/SIMsDisplay';
 import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
-const Dashboard = ({ isAdmin, isAuthenticated, accessToken }) => {
+
+
+const Dashboard = () => {
   const navigate = useNavigate();
   const url = "https://openapi.airtel.in/iot/api/customer/details/baskets";
   const [isloading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
-  const [totalSimsShow, setTotalSimsShow] = useState(false);
-  const [activeSimsShow, setActiveSimsShow] = useState(false);
   const [simType, setSimType] = useState(null);
   const [selectedBasketId, setSelectedBasketId] = useState(null);
   const fetchData = async () => {
@@ -32,8 +32,8 @@ const Dashboard = ({ isAdmin, isAuthenticated, accessToken }) => {
     } catch (error) {
       if (error.response.status === 401) {
         localStorage.clear();
-        isAdmin = false;
-        isAuthenticated = false;
+        // isAdmin = false;
+        // isAuthenticated = false;
         navigate("/", { replace: true })
       }
       console.log("error: ", error.response.status);
@@ -48,14 +48,12 @@ const Dashboard = ({ isAdmin, isAuthenticated, accessToken }) => {
       obj[key] = data[key];
       return obj;
     }, {});
-
+    
   useEffect(() => {
     fetchData();
   }, [])
 
-  const handleTotalSimsShow = () => {
-    setTotalSimsShow(true);
-  }
+ 
   const handleSimsShow = (basket, type) => {
     setSelectedBasketId(basket.basketId);
     setSimType(type);

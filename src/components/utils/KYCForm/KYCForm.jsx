@@ -2,8 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTriggerReload from '../../../context/TriggerContext';
+
+
 const KYCForm = ({setEnterIntoApp, selectedDevice, setUpdateKyc }) => {
-    console.log("selected device is : .................", selectedDevice);
+    
+    const { setTrigger } = useTriggerReload();
+
     const [selectedOption, setSelectedOption] = useState('');
     const [additionalInputVisible, setAdditionalInputVisible] = useState(false);
     const [toastDisplayed, setToastDisplayed] = useState(false);
@@ -63,7 +68,7 @@ const KYCForm = ({setEnterIntoApp, selectedDevice, setUpdateKyc }) => {
 
             console.log("submitInDataBase", submitInDatabase);
             toast.success("KYC Updated successfully...", { autoClose: 1000 })
-            setEnterIntoApp(prevState=>prevState+1)
+            setTrigger(prev => !prev)
             setToastDisplayed(true);
             setTimeout(() => {
                 setUpdateKyc(false);

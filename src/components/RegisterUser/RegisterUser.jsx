@@ -17,7 +17,7 @@ function RegisterUser({ isAdmin, isAuthenticated }) {
     const [errors, setErrors] = useState({});
 
     const handleLogin = () => {
-        navigate("/login");
+        navigate("/");
     }
 
     const handleChange = (e) => {

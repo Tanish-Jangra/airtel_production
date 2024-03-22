@@ -1,15 +1,13 @@
 // SimManagement.jsx
 import React, { useState } from 'react';
 import './SimManagement.css';
-import search from './../../assets/searchIcon.png';
 import axios from 'axios';
 import { TailSpin } from 'react-loader-spinner';
 import ActivateSim from '../ActivateSim/ActivateSim';
 import DeactivateSim from '../DeactivateSim/DeactivateSim';
 import { useNavigate } from 'react-router-dom';
-import SimDetails from '../utils/SIMDetails/SimDetails';
 import SuspendSim from '../SuspendSim/SuspendSim';
-const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) => {
+const SimManagement = () => {
 
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState(null);
@@ -43,7 +41,7 @@ const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) =>
     // Format the date as dd/mm/yyyy
     var formattedDate = day + "/" + month + "/" + year;
     activeSimDate = formattedDate;
-}
+  }
 
   const currDateFunction = () => {
     const currentDate = new Date();
@@ -71,7 +69,7 @@ const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) =>
       setDeviceData(response.data);
       SiMNo = response.data.data.SIMNo;
       const token = localStorage.getItem('token');
-      
+
       const SIMNoResponse = await axios.get(`https://openapi.airtel.in/iot/api/customer/details/basket/355661/sims?filterValue=${SiMNo}&simFilterType=SIM_NO`, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -84,20 +82,20 @@ const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) =>
       })
       console.log("SimResponseis: ", SIMNoResponse.data.data.sims);
       setSimResp(SIMNoResponse.data.data.sims[0]);
-      
+
       activeDate(SIMNoResponse.data.data.sims[0].activationDate);
       let currDate = currDateFunction();
       let prevDate = "01/01/2020";
-      const kycResponse = await axios.get(`https://openapi.airtel.in/iot/api/customer/kyc/sim/details?activationDate=${activeSimDate}-${currDate}&basketId=355661&complianceDate=${prevDate}-${currDate}&msisdn=${SIMNoResponse.data.data.sims[0].mobileNo}&pageNo=1&pageSize=25&simNo=${SIMNoResponse.data.data.sims[0].simNo}`,{
+      const kycResponse = await axios.get(`https://openapi.airtel.in/iot/api/customer/kyc/sim/details?activationDate=${activeSimDate}-${currDate}&basketId=355661&complianceDate=${prevDate}-${currDate}&msisdn=${SIMNoResponse.data.data.sims[0].mobileNo}&pageNo=1&pageSize=25&simNo=${SIMNoResponse.data.data.sims[0].simNo}`, {
         headers: {
           Authorization: 'Bearer ' + token,
           apikey: "hZUJOhtFUPDRMPrUIPKKhzEbDLS3yqy4",
-          Accept:'application/json',
+          Accept: 'application/json',
           "iv-user": "developer.24004@mrmprocom.com",
           "customer-id": "24004"
         }
       })
-      setKycDetails( kycResponse.data.data.simKycList[0]);
+      setKycDetails(kycResponse.data.data.simKycList[0]);
       console.log("kyc response isssssssssssss..................", kycResponse.data.data.simKycList[0]);
 
       setIsActive(true);
@@ -274,58 +272,58 @@ const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) =>
                 <p className='valueHeader'>{deviceData.data.SIMNo}</p>
               </div>
               {
-                    <>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>Status: </p>
-                        {/* <p className={item.simStatus==="ACTIVE" ? "valueHeader simStatusActive":"valueHeader simStatusDeactive"} >{item.simStatus}</p> */}
-                        <p className={SimResp.status === "ACTIVE" ? "valueHeader simStatusActive" : "valueHeader simStatusDeactive"} >{SimResp.status}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>activationDate: </p>
-                        <p className='valueHeader'>{SimResp.activationDate.split(" ")[0]}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                          <p className='keyHeader'>complianceDate: </p>
-                          <p className='valueHeader'>{kycDetails.complianceDate.split(" ")[0]}</p>
-                        </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>IMSI: </p>
-                        <p className='valueHeader'>{SimResp.imsi}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                          <p className='keyHeader'>KYC Status: </p>
-                          <p className='valueHeader'>{kycDetails.status}</p>
-                        </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>Data Units: </p>
-                        <p className='valueHeader'>{SimResp.dataUnits}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                          <p className='keyHeader'>kycCompletionDate: </p>
-                          <p className='valueHeader'>{kycDetails.kycCompletionDate.split(" ")[0]}</p>
-                        </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>Mobile No. : </p>
-                        <p className='valueHeader'>{SimResp.mobileNo}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>PlanCode : </p>
-                        <p className='valueHeader'>{SimResp.planCode}</p>
-                      </div>
-                      <div className='deviceInfo'>
-                        <p className='keyHeader'>PlanName : </p>
-                        <p className='valueHeader'>{SimResp.planName}</p>
-                      </div>
-                      <div className='dateDiv' >
-                        <p >{SimResp.activationDate.split(" ")[0]}</p>
-                        <div className='divWidth'>
-                          <div className='past' style={{ width: `${calculatePastDivWidth(SimResp.activationDate)}%` }}></div>
-                          <div className='future' style={{ width: `${100 - calculatePastDivWidth(SimResp.activationDate)}%` }}></div>
-                        </div>
-                        <p > {getNextYearDate(SimResp.activationDate)}</p>
-                      </div>
-                    </>
-                  // )
+                <>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>Status: </p>
+                    {/* <p className={item.simStatus==="ACTIVE" ? "valueHeader simStatusActive":"valueHeader simStatusDeactive"} >{item.simStatus}</p> */}
+                    <p className={SimResp.status === "ACTIVE" ? "valueHeader simStatusActive" : "valueHeader simStatusDeactive"} >{SimResp.status}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>activationDate: </p>
+                    <p className='valueHeader'>{SimResp.activationDate.split(" ")[0]}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>complianceDate: </p>
+                    <p className='valueHeader'>{kycDetails.complianceDate.split(" ")[0]}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>IMSI: </p>
+                    <p className='valueHeader'>{SimResp.imsi}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>KYC Status: </p>
+                    <p className='valueHeader'>{kycDetails.status}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>Data Units: </p>
+                    <p className='valueHeader'>{SimResp.dataUnits}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>kycCompletionDate: </p>
+                    <p className='valueHeader'>{kycDetails.kycCompletionDate.split(" ")[0]}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>Mobile No. : </p>
+                    <p className='valueHeader'>{SimResp.mobileNo}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>PlanCode : </p>
+                    <p className='valueHeader'>{SimResp.planCode}</p>
+                  </div>
+                  <div className='deviceInfo'>
+                    <p className='keyHeader'>PlanName : </p>
+                    <p className='valueHeader'>{SimResp.planName}</p>
+                  </div>
+                  <div className='dateDiv' >
+                    <p >{SimResp.activationDate.split(" ")[0]}</p>
+                    <div className='divWidth'>
+                      <div className='past' style={{ width: `${calculatePastDivWidth(SimResp.activationDate)}%` }}></div>
+                      <div className='future' style={{ width: `${100 - calculatePastDivWidth(SimResp.activationDate)}%` }}></div>
+                    </div>
+                    <p > {getNextYearDate(SimResp.activationDate)}</p>
+                  </div>
+                </>
+                // )
               }
             </div>
             {/* {
@@ -333,9 +331,9 @@ const SimManagement = ({ simDetails, accessToken, isAdmin, isAuthenticated }) =>
             } */}
             <div className='setDeviceStatus'>
               {
-                SimResp.status==='ACTIVE' ? (
-                  <div className='suspendBtn' onClick={handleSafeCustodySim}>Safe Custody</div> 
-                ):(<div className='activateBtn' onClick={handleActivateForm}>Activate</div>)
+                SimResp.status === 'ACTIVE' ? (
+                  <div className='suspendBtn' onClick={handleSafeCustodySim}>Safe Custody</div>
+                ) : (<div className='activateBtn' onClick={handleActivateForm}>Activate</div>)
               }
               <div className='deactivateBtn' onClick={handleDeactivateForm}>Deactivate</div>
             </div></div>

@@ -18,14 +18,14 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
 
         // Map the pathname to the corresponding item name
         const itemNames = {
-            "/dashboard": "dashboard",
-            "/addnewdevice": "addnewdevice",
-            "/alldevices": "alldevices",
-            "/activate-sim": "activate-sim",
-            "/deactivate-sim": "deactivate-sim",
-            "/simmanagement": "simmanagement",
-            "/kyc": "KYCCompliance",
-            "/billing": "billingPayment"
+            "/app/dashboard": "dashboard",
+            "/app/addnewdevice": "addnewdevice",
+            "/app/alldevices": "alldevices",
+            "/app/activate-sim": "activate-sim",
+            "/app/deactivate-sim": "deactivate-sim",
+            "/app/simmanagement": "simmanagement",
+            "/app/kyc": "KYCCompliance",
+            "/app/billing": "billingPayment"
         };
 
         // Set the active item based on the pathname
@@ -43,7 +43,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                         isAdmin && (
                             <>
                                 <NavLink
-                                    to="/dashboard"
+                                    to="/app/dashboard"
                                     end
                                     className="nav-links"
                                 >
@@ -53,7 +53,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                                     </li>
                                 </NavLink>
                                 <NavLink
-                                    to="/addnewdevice"
+                                    to="/app/addnewdevice"
                                     end
                                     className="nav-links"
                                 >
@@ -63,7 +63,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                                     </li>
                                 </NavLink>
                                 <NavLink
-                                    to="/simmanagement"
+                                    to="/app/simmanagement"
                                     end
                                     className="nav-links"
                                 >
@@ -72,7 +72,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                                         Sim Management</li>
                                 </NavLink>
                                 <NavLink
-                                    to="/alldevices"
+                                    to="/app/alldevices"
                                     end
                                     className="nav-links"
                                 >
@@ -81,7 +81,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                                         All Devices</li>
                                 </NavLink>
                                 <NavLink
-                                    to="/kyc"
+                                    to="/app/kyc"
                                     end
                                     className="nav-links"
                                 >
@@ -90,7 +90,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                                         KYC</li>
                                 </NavLink>
                                 <NavLink
-                                    to="/billing"
+                                    to="/app/billing"
                                     end
                                     className="nav-links"
                                 >
@@ -105,7 +105,7 @@ const Sidebar = ({ isAdmin, isAuthenticated }) => {
                     {
                         (isAuthenticated && !isAdmin) && (
                             <NavLink
-                                    to="/addnewdevice"
+                                    to="/app/addnewdevice"
                                     end
                                     className="nav-links"
                                 >

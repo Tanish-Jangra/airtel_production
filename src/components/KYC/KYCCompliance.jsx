@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './KYCCompliance.css';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { TailSpin } from 'react-loader-spinner';
 import KYCForm from '../utils/KYCForm/KYCForm';
 import KYCDetailsForm from '../utils/KYCDetailsForm/KYCDetailsForm';
 import { useNavigate } from 'react-router-dom';
+import useAllDeviceData from '../../context/DevicesContext';
 
-const KYCCompliance = ({setEnterIntoApp, simDetails, allDeviceData, accessToken, isAdmin, isAuthenticated }) => {
+const KYCCompliance = () => {
+    // get through context
+    let setEnterIntoApp = () => { }
+    let {all_devices} = useAllDeviceData()
+
+
     const [isLoading, setIsLoading] = useState(true);
     const [kycData, setKYCData] = useState([]);
     const [search, setSearch] = useState('');
@@ -14,17 +20,16 @@ const KYCCompliance = ({setEnterIntoApp, simDetails, allDeviceData, accessToken,
     const [selectedDevice, setSelectedDevice] = useState(null);
     const [showKycDetails, setShowKycDetails] = useState(false);
     const [kycDetail, setKycDetail] = useState(null);
-    const [selectedOption, setSelectedOption] = useState('');
     const [filteredData, setFilteredData] = useState([])
     // const [additionalInputVisible, setAdditionalInputVisible] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (allDeviceData.data && allDeviceData.data.length > 0) {
+        if (all_devices && all_devices.length > 0) {
             loadData()
             setIsLoading(false)
         }
-    }, [allDeviceData, kycData])
+    }, [all_devices, kycData])
 
     useEffect(() => {
 
@@ -58,6 +63,17 @@ const KYCCompliance = ({setEnterIntoApp, simDetails, allDeviceData, accessToken,
                 },
             });
 
+            const respSIMDetails = await axios.get("https://openapi.airtel.in/iot/api/customer/details/basket/355661/sims", {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    Accept: "application/json",
+                    apikey: "hZUJOhtFUPDRMPrUIPKKhzEbDLS3yqy4",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "iv-user": "developer.24004@mrmprocom.com",
+                    "customer-id": "24004"
+                },
+            })
+
             setKYCData(resp2.data.data.simKycList);
 
             // setIsLoading(false);
@@ -78,7 +94,7 @@ const KYCCompliance = ({setEnterIntoApp, simDetails, allDeviceData, accessToken,
 
     function loadData() {
         const data = kycData.map(kyc => {
-            const matchingDevice = allDeviceData.data.find(device => device.SIMNo === kyc.simNo);
+            const matchingDevice = all_devices.find(device => device.SIMNo === kyc.simNo);
             if (matchingDevice) {
                 return {
                     ...kyc,
@@ -160,7 +176,7 @@ const KYCCompliance = ({setEnterIntoApp, simDetails, allDeviceData, accessToken,
                     {
                         updateKYC && selectedDevice && ( // Only render form if a device is selected
                             <KYCForm
-                            setEnterIntoApp={setEnterIntoApp}
+                                setEnterIntoApp={setEnterIntoApp}
                                 selectedDevice={selectedDevice}
                                 setUpdateKyc={setUpdateKyc}
                             />

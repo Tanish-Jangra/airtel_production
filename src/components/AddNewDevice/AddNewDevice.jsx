@@ -3,7 +3,10 @@ import './AddNewDevice.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-const AddNewDevice = ({setEnterIntoApp}) => {
+import useTriggerReload from '../../context/TriggerContext';
+
+const AddNewDevice = () => {
+    const { setTrigger } = useTriggerReload()
 
     const url = "https://config.iot.mrmprocom.com/php-admin/addDevices.php";
 
@@ -48,9 +51,9 @@ const AddNewDevice = ({setEnterIntoApp}) => {
         console.log("Formdata: ", formData);
         axios.post(url, formData).then((res) => {
             console.log("res: ", res.data.success);
-            if(res.data.success===1) toast.success(`${res.data.message}`, { autoClose: 1000 });
+            if (res.data.success === 1) toast.success(`${res.data.message}`, { autoClose: 1000 });
             else {
-                toast.error(`${res.data.message}`, {autoClose: 1000});
+                toast.error(`${res.data.message}`, { autoClose: 1000 });
             }
             setToastDisplayed(true);
             setFormData({
@@ -62,8 +65,9 @@ const AddNewDevice = ({setEnterIntoApp}) => {
                 clientName: '',
                 clientAddress: '',
             });
-            setEnterIntoApp(prevState=>prevState+1);
+            setTrigger(prev => !prev);
             console.log("formdata after submission..... is:", formData);
+
         }).catch((error) => {
             console.log("Error: ", error);
         })

@@ -6,7 +6,16 @@ import { TailSpin } from 'react-loader-spinner';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
+import useAllDeviceData from '../../context/DevicesContext';
+import useTriggerReload from '../../context/TriggerContext';
+
+
+const GetAllDevice = () => {
+
+  const {setTrigger} = useTriggerReload()
+
+  let setEnterIntoApp = () => {}
+  let {all_devices}= useAllDeviceData()
 
   const [search, setSearch] = useState('');
   const [selectEditDeviceDetail, setSelectEditDeviceDetails] = useState(false);
@@ -20,6 +29,7 @@ const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
   const handleEditDevice = (device) => {
     setSelectEditDeviceDetails(true);
     setEditDeviceDetail(device);
+
     console.log("device detail for edit is :", device);
   }
 
@@ -44,7 +54,7 @@ const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
       console.log("editdevice details are here->>>>>>>>>", editDeviceDetail);
       if(confirmEdit.data.success===1) toast.success(`${confirmEdit.data.message}`, { autoClose: 1000 });
       else toast.error(`${confirmEdit.data.message}`, {autoClose: 1000});
-      setEnterIntoApp(prevState => prevState + 1);
+      setTrigger(prev => !prev)
     } catch (error) {
       toast.error("Failed to edit", { autoClose: 1000 })
     }
@@ -60,7 +70,7 @@ const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
           deviceSerialNo: deleteDevice.deviceSerialNo
         });
         toast.success('Device deleted successfully!', { autoClose: 1000 });
-        setEnterIntoApp(prevState => prevState + 1);
+        setTrigger(prev => !prev)
       } catch (error) {
         console.error("Failed to delete device:", error);
         toast.error('Failed to delete device!', { autoClose: 1000 });
@@ -70,7 +80,7 @@ const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
   };
 
 
-  const filteredData = allDeviceData.data ? allDeviceData.data.filter(item =>
+  const filteredData = all_devices ? all_devices.filter(item =>
     item.clientName.toLowerCase().includes(search.toLowerCase()) ||
     item.clientAddress.toLowerCase().includes(search.toLowerCase()) ||
     item.deviceModel.toLowerCase().includes(search.toLowerCase()) ||
@@ -98,9 +108,9 @@ const GetAllDevice = ({ setEnterIntoApp, allDeviceData }) => {
         </div>
 
         {
-          // console.log("allDeviceData.data:", allDeviceData.data)
+          // console.log("all_devices.data:", all_devices.data)
 
-          (allDeviceData.data && allDeviceData.data.length === 0) ?
+          (all_devices && all_devices.length === 0) ?
             (
               <div className="spinCont"><TailSpin
                 visible={true}

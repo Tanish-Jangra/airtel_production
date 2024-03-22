@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import './LoginUser.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAccessToken } from "../context/AccessToken";
-const LoginUser = ({setEnterIntoApp}) => {
+// import { useAccessToken } from "../context/AccessToken";
+const LoginUser = () => {
     const navigate = useNavigate();
-    const { setAccessToken } = useAccessToken();
+    // const { setAccessToken } = useAccessToken();
     const url = "https://config.iot.mrmprocom.com/php-admin/login.php";	
 
     useEffect(()=>{
         if(localStorage.getItem('user'==="tanish@mrmprocom.com")){
-            navigate("/dashboard", {replace: true})
+            navigate("/app/dashboard", {replace: true})
         }
         else if(localStorage.getItem('user')){
-            navigate("/addnewdevice", {replace: true})
+            navigate("/app/addnewdevice", {replace: true})
         }
     },[])
     const [formData, setFormData] = useState({
@@ -82,22 +82,23 @@ const LoginUser = ({setEnterIntoApp}) => {
                         // localStorage.setItem('expires_in', time);
                         
                         setTimeout(() => {
-                            alert("time expired, please login again");
+                            alert("time expired, please login again")
                             localStorage.clear();
-                            isAdmin=false;
-                            isAuthenticated=false;
-                            navigate("/login");
-                        }, (time)*1000);
+                            // isAdmin=false;
+                            // isAuthenticated=false;
+                            console.log("exited from the app ")
+                            navigate("/", { replace: true });
+                        }, (time)*10);
                         // setAccessToken(store.data.data.access_token);
 
                         
                         if(formData.email==="tanish@mrmprocom.com") {
-                            navigate("/dashboard", {replace:true});
+                            navigate("/app/dashboard", {replace:true});
                         }
                         else {
-                            navigate("/addnewdevice", {replace:true})
+                            navigate("/app/addnewdevice", {replace:true})
                         }
-                        setEnterIntoApp(prevState=>prevState+1);
+                        // setEnterIntoApp(prevState=>prevState+1);
                     }
                 })
                 .catch((error) => {
