@@ -1,0 +1,111 @@
+.LoginUserContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-image: url('./../../assets/thumbnail_waveBg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.LoginForm{
+        margin-top: 40px;
+		background-color: #ffffff;
+		height: 430px;
+		display: flex;
+		width: 320px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+		box-shadow: 0px 0px 8px 0px #111179;
+}
+
+.loginFormText {
+    margin-bottom: 40px;
+    color: #081242;
+}
+
+.loginInputCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    padding: 14px 10px;
+}
+
+.loginFieldVal {
+    width: 100%;
+}
+
+.loginInput {
+    width: 97%;
+    padding: 8px 18px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 18px;
+    color: #677eb5;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    background-color: #dadde6;
+}
+
+.loginInput:hover,
+.loginInput:focus-visible {
+    background-color: #2323d136;
+    transform: scale(1.03);
+}
+
+.loginBtnLoginPage {
+    background-color: #081242;
+    margin-top: 28px;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+}
+
+.loginBtnLoginPage:hover{
+    transform: scale(1.05);
+}
+
+.loginBtnLoginPage:active{
+    transform: scale(1);
+}
+
+.registerBtn{
+    margin: 20px 0px;
+    /* background-color: #7272d7; */
+    /* padding: 10px 20px; */
+    /* border: 2px solid #081242; */
+    border: none;
+    /* border-radius: 20px; */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: #1968df;
+}
+
+.registerBtn:hover{
+    transform: scale(1.05);
+}
+
+.registerBtn:active{
+    transform: scale(1);
+}
+
+.errorMessage{
+    color: red;
+    padding: 10px 40px;
+}
+
+.signupCont{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

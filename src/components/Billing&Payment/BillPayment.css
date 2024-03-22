@@ -1,0 +1,8 @@
+.BillPaymentContainer{
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    background-color: aquamarine;
+    height: 100%;
+}

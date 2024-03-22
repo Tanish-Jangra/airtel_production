@@ -1,0 +1,99 @@
+.DashboardContainer{
+    /* display: flex; */
+    /* background-color: rgb(218, 171, 171); */
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+    width: 100%;
+
+    /* padding-left: 60px; */
+    flex-direction: column;
+    gap: 40px;
+}
+
+.temp{
+    display: flex;
+    margin: 8px 8px 0px 8px;
+    padding: 20px 0px 20px 12px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: antiquewhite; */
+    /* gap: 20px; */
+}
+
+.dashboardData{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    width: 18%;
+    padding: 12px;
+    gap: 6px;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 0px rgb(165, 165, 182);
+}
+
+.DashitemKey{
+    /* width: 220px; */
+    color: #081242;
+    text-transform: capitalize;
+    /* flex: 1; */
+    /* font-size: 14px; */
+}
+
+
+.BasketsContainer{
+    display: flex;
+    justify-content: center;
+    padding: 6px 0px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.BasketHeader{
+    background-color: #cad2df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 6px 0px;
+    border-radius: 10px;
+    /* font-size: 14px; */
+}
+
+.BasketItems{
+    padding: 20px 0px 20px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.basketItem{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-wrap: wrap;
+    width: 40%;
+}
+
+.ItemHeading{
+    width: 190px;
+}
+
+.basketContainer{
+    width: 90%;
+    margin: 10px 20px;
+    padding: 10px 10px 0px 10px;
+    box-shadow: 0px 0px 10px 0px rgb(165, 165, 182);
+    border-radius: 10px;
+}
+
+.dashboardRow{
+    margin-left: 10px;
+}
+
+.clickableItemsPerBasket{
+    cursor: pointer;
+    color: green;
+}

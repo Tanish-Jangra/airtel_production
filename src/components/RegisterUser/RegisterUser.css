@@ -1,0 +1,156 @@
+.RegisterUserContainer{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    background-image: url('./../../assets/thumbnail_waveBg.png');
+    background-size: cover;
+}
+
+.signupForm {
+    margin-top: 40px;
+    background-color: #ffffff;
+    height: 430px;
+    display: flex;
+    width: 320px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 12px 0px #081242;
+}
+
+.signupFormText {
+    margin-bottom: 40px;
+    color: #081242;
+}
+
+.signupInputCont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 99%;
+    padding: 9px 10px;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.signupFieldVal {
+    width: 100%;
+}
+
+.signupInput {
+    width: 97%;
+    padding: 8px 18px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 18px;
+    color: #677eb5;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    background-color: #dadde6;
+}
+
+.signupInput:hover,
+.signupInput:focus-visible {
+    background-color: #2323d136;
+    transform: scale(1.03);
+}
+
+.loginBtn{
+    color: white;
+}
+
+.registerBtnRegisterPage{
+    background-color: #081242;
+    margin-top: 28px;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: white;
+}
+
+.registerBtnRegisterPage:hover{
+    transform: scale(1.05);
+}
+
+.registerBtnRegisterPage:active{
+    transform: scale(1);
+}
+
+.loginBtnRegisterPage{
+    margin: 20px 0px;
+    /* background-color: #7272d7; */
+    /* padding: 10px 20px; */
+    /* border: 2px solid #081242; */
+    border: none;
+    /* border-radius: 20px; */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: #1968df;
+}
+
+.registerPageBtns{
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+}
+
+.loginBtnRegisterPage:hover{
+    transform: scale(1.05);
+}
+
+.loginBtnRegisterPage:active{
+    transform: scale(1);
+}
+
+.errorMessage{
+    color: red;
+    padding: 0px 40px;
+}
+
+.VerifyEmailContainer{
+    /* background-color: rgb(212, 185, 185); */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.EmailContContent{
+    width: 500px;
+    height: 200px;
+    background-color: #f2f3f5;
+    border-radius: 10px;
+    display: flex;
+    /* justify-content: center; */
+    gap: 20px;
+    padding: 12px 20px;
+    align-items: center;
+    box-shadow: 0px 0px 10px 0px rgb(165, 165, 182);
+    flex-direction: column;
+}
+
+.verificationEmailBtn{
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.verificationEmailContent p{
+    text-align: center;
+}
+
+.CompLogoHead{
+    position: absolute;
+    top: 18px;
+    left: 28%;
+    font-size: 3rem;
+    color: #677eb5;
+}

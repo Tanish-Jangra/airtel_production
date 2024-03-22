@@ -1,0 +1,18 @@
+.NavbarContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #1968df;
+    padding: 10px 60px;
+    position: sticky;
+    top: 0;
+}
+
+.NavbarItems .ListItem{
+    list-style: none;
+    padding: 10px 10px;
+    color: white;
+    cursor: pointer;
+    /* background-color: #ffffff; */
+    border-radius: 4px;
+}
